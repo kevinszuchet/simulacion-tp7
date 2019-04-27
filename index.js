@@ -17,7 +17,7 @@ function simular(CC, CHT) {
 		console.log("La próxima venta sera en:", IV);
 
 		const MV = montoVenta();
-		console.log("Monto de la venta:", MV);
+		console.log("Monto de la próxima venta:", MV);
 
 		reiniciarMes(); // TODO ver cuando usar
 
