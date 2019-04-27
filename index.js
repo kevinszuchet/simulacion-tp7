@@ -2,7 +2,8 @@ console.log("------------------ Inicio simulación ------------------");
 console.log("Fijación de condiciones iniciales del modelo");
 var T = 0, TPV = 0, TF = /*tiempo que queremos que corra*/,	
 	SHTD = 0, // Variable de estado
-	SFM = 0, 
+	SFM = 0,
+	cantidadDias = 0, cantidadMeses = 0, // Sirven para reiniciar la facutracion mensual
 	STO = 0, SF = 0, CPA = 0, SFPEF = 0, SFPTE = 0; // Variables para cálculos de resultados
 
 // Recibe por parametro las variables de control
@@ -19,7 +20,7 @@ function simular(CC, CHT) {
 		const MV = montoVenta();
 		console.log("Monto de la próxima venta:", MV);
 
-		reiniciarMes(); // TODO ver cuando usar
+		reiniciarVariables();
 
 		if (SHTD < CHT) {
 			if (SFM < TOPE_FACTURACION) {
@@ -58,8 +59,16 @@ function montoVenta() {
 	return -491.09 * ln((1 - R) / (R * Math.exp(2.935511))); // -Cte * ln(1 - R / R * e a la OtraCte)
 }
 
-function reiniciarMes() {
-
+function reiniciarVariables() {
+	// TODO revisar esto
+	if ((T - cantidadDias) * 1440 >= 1440) {
+		cantidadDias++;
+		SHTD = 0;
+		if ((cantidadDias - cantidadMeses) * 30 >= 30) {
+			cantidadMeses++;
+			SFM = 0;
+		}
+	}
 }
 
 function calcularResultados() {
