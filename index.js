@@ -45,11 +45,17 @@ function simular(CC, CHT) {
 }
 
 function intevraloEntreVentas() {
+	const R = Math.random();
+	if (R <= 0) return intevraloEntreVentas();
 
+	return 0.829556 * (((1 / R) - 1) ^ (1 / 208.49)); // A * (Raiz B de ((1 - R) / R))
 }
 
 function montoVenta() {
+	const R = Math.random(), ln = Math.log;
+	if (R <= 0.04 || R >= 0.99) return montoVenta();
 
+	return -491.09 * ln((1 - R) / (R * Math.exp(2.935511))); // -Cte * ln(1 - R / R * e a la OtraCte)
 }
 
 function reiniciarMes() {
