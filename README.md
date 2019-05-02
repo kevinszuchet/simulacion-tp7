@@ -27,4 +27,4 @@ Además, el máximo que se puede facturar por cuenta en MercadoLibre es de $90.0
 - Promedio de pedidos atendidos por día: ***PPAD***
 - Porcentaje de ganancia pérdida por exceder facturación: ***PGPEF***
 
-Para poder correr la simulacion llamar a la función `simular(CC, CHT)` pasandole por parametros las variables de control a tener en cuenta.
+Para poder correr la simulacián llamar a la función `simular(CC, CHT)` pasándole por parámetro las variables de control a tener en cuenta.
