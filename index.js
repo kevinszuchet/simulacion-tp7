@@ -12,6 +12,7 @@ function simular(CC, CHT) {
 	const TOPE_FACTURACION = 90000 * CC; // 90000 (por afip) por cada cuenta que tenga
 
 	while(T < TF) {
+		STO += TPV - T;
 		T = TPV;
 		
 		const IV = intevraloEntreVentas();
@@ -43,7 +44,7 @@ function simular(CC, CHT) {
 	}
 
 	console.log("Cálculo de resultados");
-	calcularResultados();
+	calcularResultados(CHT);
 	console.log("------------------ Fin simulación ------------------");
 }
 
@@ -68,6 +69,7 @@ function reiniciarVariables() {
 		SHTD = 0;
 		if ((cantidadDias - cantidadMeses) * 30 >= 30) {
 			cantidadMeses++;
+			SF += SFM;
 			SFM = 0;
 		}
 	}
@@ -77,12 +79,12 @@ function gananciaDeFacturacion(facturacion){
 	return facturacion * 0.24;
 }
 
-function calcularResultados() {
-	const CHT = 0, // Cantidad de horas trabajadas
-		CD = 0; // Cantidad de días trabajados
+function calcularResultados(CHT) {
+	const CHML = cantidadDias * CHT, // Cantidad de horas dedicadas a ML (trabajadas o no)
+		CD = cantidadDias; // Cantidad de días trabajados
 
-	console.log("Porcentaje de tiempo ocioso (PTO)", STO * 100 / CHT);
-	console.log("Promedio de ganancia por hora (PGH)", gananciaDeFacturacion(SF) / CHT);
+	console.log("Porcentaje de tiempo ocioso (PTO)", STO * 100 / CHML);
+	console.log("Promedio de ganancia por hora (PGH)", gananciaDeFacturacion(SF) / CHML);
 	console.log("Porcentaje de ganancia en tiempo excedido (PGTE)", SFPTE * 100 / (SF + SFPTE));
 	console.log("Promedio de pedidos atendidos por día (PPAD)", CPA / CD);
 	console.log("Porcentaje de ganancia pérdida por exceder facturación (PGPEF)", SFPEF * 100 / (SF + SFPEF));
