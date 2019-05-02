@@ -1,6 +1,7 @@
 console.log("------------------ Inicio simulación ------------------");
 console.log("Fijación de condiciones iniciales del modelo");
-var T = 0, TPV = 0, TF = /*tiempo que queremos que corra*/,	
+const TF = 525600; // Un año en minutos
+var T = 0, TPV = 0,	
 	SHTD = 0, // Variable de estado
 	SFM = 0,
 	cantidadDias = 0, cantidadMeses = 0, // Sirven para reiniciar la facutracion mensual
@@ -42,7 +43,8 @@ function simular(CC, CHT) {
 	}
 
 	console.log("Cálculo de resultados");
-	calcularResultados();	
+	calcularResultados();
+	console.log("------------------ Fin simulación ------------------");
 }
 
 function intevraloEntreVentas() {
@@ -54,7 +56,7 @@ function intevraloEntreVentas() {
 
 function montoVenta() {
 	const R = Math.random(), ln = Math.log;
-	if (R <= 0.04 || R >= 0.99) return montoVenta();
+	if (R <= 0.09 || R >= 0.99) return montoVenta();
 
 	return -491.09 * ln((1 - R) / (R * Math.exp(2.935511))); // -Cte * ln(1 - R / R * e a la OtraCte)
 }
@@ -82,5 +84,6 @@ function calcularResultados() {
 	console.log("Porcentaje de ganancia pérdida por exceder facturación (PGPEF)", SFPEF * 100 / (SF + SFPEF));
 }
 
+const CC = process.argv[2];
+const CHT = process.argv[3];
 simular(CC, CHT);
-console.log("------------------ Fin simulación ------------------");
