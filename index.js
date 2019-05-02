@@ -64,10 +64,10 @@ function montoVenta() {
 
 function reiniciarVariables() {
 	// TODO revisar esto
-	if ((T - cantidadDias) * 1440 >= 1440) {
+	if (T - cantidadDias * 1440 >= 1440) {
 		cantidadDias++;
 		SHTD = 0;
-		if ((cantidadDias - cantidadMeses) * 30 >= 30) {
+		if (cantidadDias - cantidadMeses * 30 >= 30) {
 			cantidadMeses++;
 			SF += SFM;
 			SFM = 0;
