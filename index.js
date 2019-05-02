@@ -73,12 +73,16 @@ function reiniciarVariables() {
 	}
 }
 
+function gananciaDeFacturacion(facturacion){
+	return facturacion * 0.24;
+}
+
 function calcularResultados() {
 	const CHT = 0, // Cantidad de horas trabajadas
 		CD = 0; // Cantidad de días trabajados
 
 	console.log("Porcentaje de tiempo ocioso (PTO)", STO * 100 / CHT);
-	console.log("Promedio de ganancia por hora (PGH)", SF / CHT);
+	console.log("Promedio de ganancia por hora (PGH)", gananciaDeFacturacion(SF) / CHT);
 	console.log("Porcentaje de ganancia en tiempo excedido (PGTE)", SFPTE * 100 / (SF + SFPTE));
 	console.log("Promedio de pedidos atendidos por día (PPAD)", CPA / CD); // TODO revisar porque en la propuesta dice "incluyendo las ventas no contabilizadas"
 	console.log("Porcentaje de ganancia pérdida por exceder facturación (PGPEF)", SFPEF * 100 / (SF + SFPEF));
