@@ -1,8 +1,8 @@
 console.log("------------------ Inicio simulación ------------------");
 console.log("Fijación de condiciones iniciales del modelo");
 const TF = 525600; // Un año en minutos
-var T = 0, TPV = 0,	
-	SHTD = 0, // Variable de estado
+var T = 0, TPV = 0,	// Se manejan en minutos
+	SHTD = 0, // Variable de estado (en horas)
 	SFM = 0,
 	cantidadDias = 0, cantidadMeses = 0, // Sirven para reiniciar la facutracion mensual
 	STO = 0, SF = 0, CPA = 0, SFPEF = 0, SFPTE = 0; // Variables para cálculos de resultados
@@ -14,11 +14,11 @@ function simular(CC, CHT) {
 	while(T < TF) {
 		T = TPV;
 		
-		const IV = intervaloEntreVentas();
+		const IV = intervaloEntreVentas(); // Intervalo en minutos
 		TPV = T + IV;
 		console.log("La próxima venta sera en:", IV);
 
-		const MV = montoVenta();
+		const MV = montoVenta(); // Monto en $
 		console.log("Monto de la próxima venta:", MV);
 
 		reiniciarVariables(CHT);
@@ -26,7 +26,7 @@ function simular(CC, CHT) {
 		if (SHTD < CHT) {
 			if (SFM < TOPE_FACTURACION) {
 				console.log("Atiendo un pedido");
-				SHTD += 15; // Sumo 15 minutos
+				SHTD += 0.25; // Sumo 15 minutos (en horas)
 				SFM += MV; // Sumo el monto de la venta a la facturacion del mes
 				CPA++; // Incremento un pedido atendido
 				continue;
@@ -63,11 +63,11 @@ function montoVenta() {
 
 function reiniciarVariables(CHT) {
 	// TODO revisar esto
-	if (T - cantidadDias * 1440 >= 1440) {
+	if (T - (cantidadDias * 1440) >= 1440) { // Me fijo si paso al menos un dia
 		cantidadDias++;
-		STO += CHT - SHTD;
+		STO += CHT - SHTD; // Tiempo ocioso en horas
 		SHTD = 0;
-		if (cantidadDias - cantidadMeses * 30 >= 30) {
+		if (cantidadDias - (cantidadMeses * 30) >= 30) { // Me fijo si paso al menos un mes
 			cantidadMeses++;
 			SF += SFM;
 			SFM = 0;
