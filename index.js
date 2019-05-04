@@ -12,7 +12,6 @@ function simular(CC, CHT) {
 	const TOPE_FACTURACION = 90000 * CC; // 90000 (por afip) por cada cuenta que tenga
 
 	while(T < TF) {
-		STO += TPV - T;
 		T = TPV;
 		
 		const IV = intevraloEntreVentas();
@@ -66,6 +65,7 @@ function reiniciarVariables() {
 	// TODO revisar esto
 	if (T - cantidadDias * 1440 >= 1440) {
 		cantidadDias++;
+		STO += CHT - SHTD; // TODO deberia ir aca?
 		SHTD = 0;
 		if (cantidadDias - cantidadMeses * 30 >= 30) {
 			cantidadMeses++;
