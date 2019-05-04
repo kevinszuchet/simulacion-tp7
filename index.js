@@ -83,11 +83,11 @@ function calcularResultados(CHT) {
 	const CHML = cantidadDias * CHT, // Cantidad de horas dedicadas a ML (trabajadas o no)
 		CD = cantidadDias; // Cantidad de días trabajados
 
-	console.log("Porcentaje de tiempo ocioso (PTO)", STO * 100 / CHML);
-	console.log("Promedio de ganancia por hora (PGH)", gananciaDeFacturacion(SF) / CHML);
-	console.log("Porcentaje de ganancia en tiempo excedido (PGTE)", SFPTE * 100 / (SF + SFPTE));
-	console.log("Promedio de pedidos atendidos por día (PPAD)", CPA / CD);
-	console.log("Porcentaje de ganancia pérdida por exceder facturación (PGPEF)", SFPEF * 100 / (SF + SFPEF));
+	console.log(`Porcentaje de tiempo ocioso (PTO): ${STO * 100 / CHML}%`);
+	console.log(`Promedio de ganancia por hora (PGH): $${gananciaDeFacturacion(SF) / CHML}/H`);
+	console.log(`Porcentaje de ganancia en tiempo excedido (PGTE): ${SFPTE * 100 / (SF + SFPTE)}%`);
+	console.log(`Promedio de pedidos atendidos por día (PPAD): ${CPA / CD} pedidos`);
+	console.log(`Porcentaje de ganancia pérdida por exceder facturación (PGPEF): ${SFPEF * 100 / (SF + SFPEF)}%`);
 }
 
 const CC = process.argv[2];
