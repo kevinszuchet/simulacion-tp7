@@ -14,7 +14,7 @@ function simular(CC, CHT) {
 	while(T < TF) {
 		T = TPV;
 		
-		const IV = intevraloEntreVentas();
+		const IV = intervaloEntreVentas();
 		TPV = T + IV;
 		console.log("La próxima venta sera en:", IV);
 
@@ -47,9 +47,9 @@ function simular(CC, CHT) {
 	console.log("------------------ Fin simulación ------------------");
 }
 
-function intevraloEntreVentas() {
+function intervaloEntreVentas() {
 	const R = Math.random();
-	if (R <= 0) return intevraloEntreVentas();
+	if (R <= 0) return intervaloEntreVentas();
 
 	return 0.829556 * (((1 / R) - 1) ^ (1 / 208.49)); // A * (Raiz B de ((1 - R) / R))
 }
