@@ -1,4 +1,4 @@
-console.log("------------------ Inicio simulación ------------------");
+﻿console.log("------------------ Inicio simulación ------------------");
 console.log("Fijación de condiciones iniciales del modelo");
 const TF = 525600; // Un año en minutos
 var T = 0, TPV = 0,	// Se manejan en minutos
@@ -49,21 +49,21 @@ function simular(CC, CHT) {
 
 function intervaloEntreVentas() {
 	const R = Math.random();
-	if (R <= 0) return intervaloEntreVentas();
-
-	return 0.829556 * (((1 / R) - 1) ^ (1 / 208.49)); // A * (Raiz B de ((1 - R) / R))
+	if (R < 0.1 || R > 0.8) return intervaloEntreVentas();
+	console.log("R = " + R);
+	return (186.27 / (((1 / R) - 1) ** (1 / 0.85143))); // B / (Raiz A de ((1 / R - 1))
 }
 
 function montoVenta() {
 	const R = Math.random(), ln = Math.log;
 	if (R <= 0.09 || R >= 0.99) return montoVenta();
-
+	
 	return -491.09 * ln((1 - R) / (R * Math.exp(2.935511))); // -Cte * ln(1 - R / R * e a la OtraCte)
 }
 
 function reiniciarVariables(CHT) {
 	// TODO revisar esto
-	if (T - (cantidadDias * 1440) >= 1440) { // Me fijo si paso al menos un dia
+	while (T - (cantidadDias * 1440) >= 1440) { // Me fijo si paso al menos un dia		
 		cantidadDias++;
 		STO += CHT - SHTD; // Tiempo ocioso en horas
 		SHTD = 0;
@@ -86,7 +86,6 @@ function redondearResultado(resultado){
 function calcularResultados(CHT) {
 	const CHML = cantidadDias * CHT, // Cantidad de horas dedicadas a ML (trabajadas o no)
 		CD = cantidadDias; // Cantidad de días trabajados
-
 	console.log(`Porcentaje de tiempo ocioso (PTO): ${redondearResultado(STO * 100 / CHML)}%`);
 	console.log(`Promedio de ganancia por hora (PGH): $${redondearResultado(gananciaDeFacturacion(SF) / CHML)}/H`);
 	console.log(`Porcentaje de ganancia en tiempo excedido (PGTE): ${redondearResultado(SFPTE * 100 / (SF + SFPTE))}%`);
