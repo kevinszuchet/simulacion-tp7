@@ -8,7 +8,7 @@ Una vez instalado y estando parado en el directorio que contiene el archivo inde
 
 `node index.js 1 3`
 
-donde los parámetros representan la cantidad de cuentas y de horas a dedicar por día al canal de MercadoLibre.
+donde los parámetros representan la cantidad de cuentas y de horas a dedicar por día al canal de MercadoLibre, respectivamente.
 
 ### Descripción del problema
 
